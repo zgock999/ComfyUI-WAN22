@@ -1,0 +1,4 @@
+# models フォルダ内の実ファイルを Git 追跡から外す
+models/*
+# ただし、ディレクトリ構造を維持するために .gitkeep 等があればそれは許可する
+!models/**/.gitkeep

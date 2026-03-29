@@ -1,0 +1,31 @@
+name: Build and Push Wan2.2 Image
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Pre-stage Models from Local Master
+        run: |
+          # 開発ディレクトリにあるモデル群を、ランナーのビルド用ディレクトリへリンクする
+          # これにより、GitHubへ送ることなく、ビルド時だけモデルが「現れる」状態にします
+          rm -rf models # 万が一空のフォルダがあれば削除
+          cp -rl ~/wan22-work/ComfyUI-WAN22/models ./models
+
+      - name: Login to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build and Push Docker Image
+        run: |
+          # あなたの3090機でビルドが走ります
+          docker build -t ghcr.io/${{ github.repository }}/comfyui-wan22:latest .
+          docker push ghcr.io/${{ github.repository }}/comfyui-wan22:latest
