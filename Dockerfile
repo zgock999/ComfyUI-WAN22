@@ -15,7 +15,7 @@ RUN cd custom_nodes && \
     git clone https://github.com/kijai/ComfyUI-KJNodes.git && \
     git clone https://github.com/yolain/ComfyUI-Easy-Use.git && \
     git clone https://github.com/ltdrdata/ComfyUI-Impact-Pack.git && \
-    git clone https://github.com/BioniX/ComfyUI-Vid2Vid.git && \
+    git clone https://github.com/sylym/comfy_vid2vid.git && \
     find . -maxdepth 2 -name "requirements.txt" -exec pip3 install -r {} +
 
 # ★ ここでローカルに用意した OSS モデル群を一気に焼き込む
