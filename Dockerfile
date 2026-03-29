@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu24.04
+FROM nvidia/cuda:12.4.1-devel-ubuntu24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 # build-essential, g++, python3-dev を追加してコンパイルエラーを防ぐ
@@ -8,14 +8,14 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/*
 
 # pip 自体を最新にする（重要）
-RUN pip3 install --upgrade pip
+RUN pip3 install --upgrade pip --break-system-packages
 
 WORKDIR /app
 
 COPY ./pkgs /app/pkgs
 
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git . && \
-    pip3 install -r requirements.txt
+    pip3 install -r requirements.txt --break-system-packages
 
 RUN pip3 install /app/pkgs/sageattention-2.2.0-cp312-cp312-linux_x86_64.whl --break-system-packages
 
