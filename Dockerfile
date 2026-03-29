@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
+FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 # build-essential, g++, python3-dev を追加してコンパイルエラーを防ぐ
@@ -11,8 +11,15 @@ RUN apt-get update && apt-get install -y \
 RUN pip3 install --upgrade pip
 
 WORKDIR /app
+
+COPY ./pkgs /app/pkgs
+
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git . && \
     pip3 install -r requirements.txt
+
+RUN pip3 install /app/pkgs/sageattention-2.2.0-cp312-cp312-linux_x86_64.whl --break-system-packages
+
+RUN pip3 install /app/pkgs/spas_sage_attn-0.1.0-cp312-cp312-linux_x86_64.whl --break-system-packages
 
 # Manager を pip から入れる（前回特定した最新仕様）
 RUN pip3 install comfyui-manager
