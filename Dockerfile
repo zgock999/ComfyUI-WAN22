@@ -21,7 +21,7 @@ RUN pip3 install /app/pkgs/sageattention-2.2.0-cp312-cp312-linux_x86_64.whl --br
 RUN pip3 install /app/pkgs/spas_sage_attn-0.1.0-cp312-cp312-linux_x86_64.whl --break-system-packages
 
 # Manager を pip から入れる（前回特定した最新仕様）
-RUN pip3 install comfyui-manager
+RUN pip3 install comfyui-manager --break-system-packages
 
 # カスタムノードのインストール
 # 一つの RUN で && を多用せず、分割するか個別に実行することで原因を特定しやすくします
@@ -34,7 +34,7 @@ RUN cd custom_nodes && \
 
 # 各ノードの依存関係を個別にインストール（エラーが出たノードを特定するため）
 # 失敗してもビルドを止めない `--no-cache-dir` などを付けて安定させます
-RUN for req in custom_nodes/*/requirements.txt; do pip3 install --no-cache-dir -r "$req"; done
+RUN for req in custom_nodes/*/requirements.txt; do pip3 install --break-system-packages --no-cache-dir -r "$req"; done
 
 # 30GBの重量級モデル焼き込み
 COPY ./models/ /app/models/
