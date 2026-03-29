@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # build-essential, g++, python3-dev を追加してコンパイルエラーを防ぐ
 RUN apt-get update && apt-get install -y \
     git wget curl python3-pip python3-dev build-essential g++ \
-    libgl1-mesa-glx libglib2.0-0 rclone vim && \
+    libgl1 libglib2.0-0 rclone vim && \
     rm -rf /var/lib/apt/lists/*
 
 # pip 自体を最新にする（重要）
