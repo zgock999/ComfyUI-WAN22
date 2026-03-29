@@ -27,5 +27,5 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           # あなたの3090機でビルドが走ります
-          docker build -t ghcr.io/zgock999/comfyui-wan22:latest .
+          docker build --no-cache -t ghcr.io/zgock999/comfyui-wan22:latest .
           docker push ghcr.io/zgock999/comfyui-wan22:latest
