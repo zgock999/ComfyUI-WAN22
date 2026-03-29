@@ -11,10 +11,10 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-COPY ./pkgs /app/pkgs
-
 RUN git clone https://github.com/comfyanonymous/ComfyUI.git . && \
     pip3 install -r requirements.txt --break-system-packages
+
+COPY ./pkgs /app/pkgs
 
 RUN pip3 install /app/pkgs/sageattention-2.2.0-cp312-cp312-linux_x86_64.whl --break-system-packages
 
