@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/*
 
 # pip 自体を最新にする（重要）
-RUN pip3 install --upgrade pip --break-system-packages
+#RUN pip3 install --upgrade pip --break-system-packages
 
 WORKDIR /app
 
