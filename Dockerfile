@@ -2,7 +2,7 @@ FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
 
 # システム依存パッケージ
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install -y git wget curl python3-pip python3-dev libgl1-mesa-glx libglib2.0-0 rclone && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y git wget curl python3-pip python3-dev libgl1-mesa-glx libglib2.0-0 rclone vim && rm -rf /var/lib/apt/lists/*
 
 # ComfyUI 本体のセットアップ
 WORKDIR /app
@@ -15,7 +15,7 @@ RUN cd custom_nodes && \
     git clone https://github.com/kijai/ComfyUI-KJNodes.git && \
     git clone https://github.com/yolain/ComfyUI-Easy-Use.git && \
     git clone https://github.com/ltdrdata/ComfyUI-Impact-Pack.git && \
-    git clone https://github.com/BionicX/ComfyUI-Vid2Vid.git && \
+    git clone https://github.com/BioniX/ComfyUI-Vid2Vid.git && \
     find . -maxdepth 2 -name "requirements.txt" -exec pip3 install -r {} +
 
 # ★ ここでローカルに用意した OSS モデル群を一気に焼き込む
