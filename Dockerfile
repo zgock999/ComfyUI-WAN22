@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     libgl1 libglib2.0-0 rclone vim && \
     rm -rf /var/lib/apt/lists/*
 
-# pip 自体を最新にする（削除）
+# pip 自体を最新にする（削除済）
 
 WORKDIR /app
 
